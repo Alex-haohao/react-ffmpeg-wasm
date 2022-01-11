@@ -26,10 +26,9 @@ function App() {
         setMessage('Loading ffmpeg-core.js');
         await ffmpeg.load();
         setMessage('get mp4 info');
-        ffmpeg.FS('writeFile', 'test.mp4', await fetchFile('https://cn-sdjn2-cu-v-06.bilivideo.com/upgcxcode/30/75/478047530/478047530-1-208.mp4?e=ig8euxZM2rNcNbNM7bdVhwdlhbKjhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1641931674&gen=playurlv2&os=bcache&oi=3732974682&trid=0000f7833845267b4a739d6153201aa30bd8T&platform=html5&upsig=0c107712d7ab76b5b19dfbe81ba6d1cc&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&cdnid=8173&mid=0&bvc=vod&nettype=0&bw=246854&orderid=0,1&logo=80000000'));
-        await ffmpeg.run('-i', 'test.mp4');
-        console.log(logs);
-        console.log("12312312")
+        ffmpeg.FS('writeFile', 'test.mp4', await fetchFile('/static/test.mp4'));
+        await ffmpeg.run('-i' ,'test.mp4' ,'-vf' ,'\'fps=1/10:round=zero:start_time=-9,scale=190x100,tile=5x5\'', 'output.jpg');
+        // ffmpeg.FS('writeFile', 'output.jpg', new Uint8Array(await ffmpeg.FS('readFile', 'output.jpg')));
     };
 
   return (
